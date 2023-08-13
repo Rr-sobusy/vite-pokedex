@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Bitter&family=Dancing+Script:wght@400;700&display=swap');
+
+.__responsive-container {
+  @apply grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 bg-black grid 
+  justify-center gap-5 px-4 py-4
+}
+
+.__main-container {
+ @apply bg-black min-h-screen
+}
+
+
+/* *
+Pokemon Types bg
+*/
+.grass {
+ @apply bg-gradient-to-r w-full from-[#00ff87] to-[#60efff]
+}
+
+.fire {
+  @apply  bg-gradient-to-r w-full from-[#f3696e] to-[#f4762d]
+}
+
+.water {
+  @apply bg-gradient-to-r w-full from-[#6fe3e1] to-[#5257e5]
+
+}
+
+.electric {
+  @apply bg-gradient-to-r w-full from-[#ff930f] to-[#fff95b]
+}
+
+.bug {
+  @apply bg-gradient-to-r w-full from-[#51c26f] to-[#103783]
+}
+
+.ground {
+  @apply bg-gradient-to-r w-full from-[#beb15b] to-[#d5cfac]
+}
