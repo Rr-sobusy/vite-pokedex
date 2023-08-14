@@ -1,5 +1,12 @@
 import React from "react";
-import { getPokemonImgs } from "../libs/fetcher functions";
+import { getPokemonImgs } from "../libs/utils";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 type Props = {
   pokemons: any;
@@ -12,27 +19,30 @@ const PokemonHome = (props: Props) => {
     <>
       <div className="__main-container">
         <p className="text-white tracking-[6px] font-bold text-[2.5rem] text-center font-['Bitter'] pt-7">
-          Rex Pokedex
+          React Pokedex
         </p>
         <p className="text-white tracking-[6px]  text-sm text-center">
           Let the fun begin!
         </p>
-        <select
-          onChange={(e) => changePageHandler(Number(e.target.value))}
-          className="select select-lg select-primary select-bordered w-full h-4 max-w-xs"
-        >
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((number: number) => (
-            <option key={number} value={number}>
-              {number}
-            </option>
-          ))}
-        </select>
+        <Select onValueChange={(e) => changePageHandler(Number(e))}>
+          <SelectTrigger value={"rex"} className="w-[180px]">
+            <SelectValue placeholder="Select Page" />
+          </SelectTrigger>
+          <SelectContent>
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num: number) => (
+              <SelectItem key={num} value={num.toString()}>{num}</SelectItem>
+            ))}
+            {/* <SelectItem value="light">Light</SelectItem>
+            <SelectItem value="dark">Dark</SelectItem>
+            <SelectItem value="system">System</SelectItem> */}
+          </SelectContent>
+        </Select>
         <div className="__responsive-container">
           {pokemons ? (
             pokemons.map((values: { name: string; id: number }) => (
               <div
                 key={values.id}
-                className={`grid cursor-pointer hover:scale-105 duration-500 rounded-lg            
+                className={`grid grass cursor-pointer hover:scale-105 duration-500 rounded-lg            
               `}
               >
                 <p className="text-white text-lg absolute ml-3 mt-2">{`${values.id}`}</p>
@@ -48,7 +58,7 @@ const PokemonHome = (props: Props) => {
               </div>
             ))
           ) : (
-            <p className="text-white">Loading</p>
+            <p className="text-white text-center">Loading Pokemons ...</p>
           )}
         </div>
       </div>

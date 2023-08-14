@@ -1,14 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { PokemonHome } from "./components";
-import { getPokemons } from "./libs/fetcher functions";
+import { getPokemons, getPokemonType } from "./libs/fetcher functions";
 
 // Initial Page
 const initialPage = 0;
 function App() {
-  //
+  // Local states
   const [currentPage, setCurrentPage] = useState<number>(initialPage);
 
+  // Fetch Pokemontypes
+  const { data: pokemonTypes } = useQuery({
+    queryKey: ["pokemonTypes"],
+    queryFn: () => getPokemonType(),
+  });
+  console.log(pokemonTypes);
+
+  // Fetch Pokemons
   const { data: pokemonData } = useQuery({
     queryKey: ["pokemonLists", currentPage],
     queryFn: () => getPokemons(currentPage),
@@ -21,6 +29,8 @@ function App() {
       };
     }
   );
+
+  // Fetch Pokemon types
 
   const pageHandler = (pageNumber: number) => {
     setCurrentPage(() => {
@@ -38,6 +48,10 @@ function App() {
         ? 500
         : pageNumber === 7
         ? 600
+        : pageNumber === 8
+        ? 700
+        : pageNumber === 9
+        ? 800
         : 0;
     });
   };
