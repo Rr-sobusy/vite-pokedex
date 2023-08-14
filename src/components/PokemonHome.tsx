@@ -39,10 +39,10 @@ const PokemonHome = (props: Props) => {
         </Select>
         <div className="__responsive-container">
           {pokemons ? (
-            pokemons.map((values: { name: string; id: number }) => (
+            pokemons.map((values: { name: string; id: number, type: string[] }) => (
               <div
                 key={values.id}
-                className={`grid grass cursor-pointer hover:scale-105 duration-500 rounded-lg            
+                className={`grid ${values.type.join(" ")} cursor-pointer hover:scale-105 duration-500 rounded-lg            
               `}
               >
                 <p className="text-white text-lg absolute ml-3 mt-2">{`${values.id}`}</p>
@@ -54,7 +54,9 @@ const PokemonHome = (props: Props) => {
                 <p className="text-center tracking-[7px] mb-4 font-sans font-semibold text-white capitalize text-2xl">
                   {values.name}
                 </p>
-                <p className="text-center mb-4 font-sans font-semibold text-white capitalize text-md"></p>
+                <p className="text-center mb-4 font-sans font-semibold text-white capitalize text-md">
+                  {values.type.join(" ")}
+                </p>
               </div>
             ))
           ) : (

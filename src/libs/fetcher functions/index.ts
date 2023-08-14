@@ -11,17 +11,16 @@ export async function getPokemons(page: number) {
 }
 
 // Get pokemon types pokemonId
-export async function getPokemonType() {
+export async function getPokemonType(pageNumber: number) {
   try {
     let pokemonTypes: object[] = [];
     const pokemonArray = Array.from({ length: 100 }, (_, index) => index + 1);
     for (const pokemons in pokemonArray) {
       const pokemonType = await fetch(
-        `https://pokeapi.co/api/v2/pokemon/${Number(pokemons) + 1}`
+        `https://pokeapi.co/api/v2/pokemon/${Number(pokemons) + 1 + pageNumber}`
       );
       const type = await pokemonType?.json();
       pokemonTypes.push({
-        id: Number(pokemons) + 1,
         name: type.species.name,
         types: type.types.map(
           (val: { type: { name: string } }) => val.type.name

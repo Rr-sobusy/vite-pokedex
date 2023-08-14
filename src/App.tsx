@@ -11,24 +11,16 @@ function App() {
 
   // Fetch Pokemontypes
   const { data: pokemonTypes } = useQuery({
-    queryKey: ["pokemonTypes"],
-    queryFn: () => getPokemonType(),
+    queryKey: ["pokemonTypes", currentPage],
+    queryFn: () => getPokemonType(currentPage),
   });
-  console.log(pokemonTypes);
-
-  // Fetch Pokemons
-  const { data: pokemonData } = useQuery({
-    queryKey: ["pokemonLists", currentPage],
-    queryFn: () => getPokemons(currentPage),
+  const pokemons = pokemonTypes?.map((pokemon: any, key) => {
+    return {
+      id: currentPage + key + 1,
+      name: pokemon.name,
+      type: pokemon.types,
+    };
   });
-  const pokemons = pokemonData?.results.map(
-    (pokemon: { name: string }, index: number) => {
-      return {
-        id: index + currentPage + 1,
-        name: pokemon.name,
-      };
-    }
-  );
 
   // Fetch Pokemon types
 
