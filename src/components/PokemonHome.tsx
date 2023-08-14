@@ -24,7 +24,7 @@ const PokemonHome = (props: Props) => {
         <p className="text-white tracking-[6px]  text-sm text-center">
           Let the fun begin!
         </p>
-        <Select onValueChange={(e) => changePageHandler(Number(e))}>
+        <Select onValueChange={(e:React.ChangeEventHandler<HTMLSelectElement>) => changePageHandler(Number(e))}>
           <SelectTrigger value={"rex"} className="w-[180px]">
             <SelectValue placeholder="Select Page" />
           </SelectTrigger>
