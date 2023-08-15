@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bitter:wght@400;600&family=Dancing+Script:wght@400;700&family=Ubuntu:ital,wght@1,300&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -74,8 +76,6 @@
     @apply bg-background text-foreground;
   }
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Bitter&family=Dancing+Script:wght@400;700&display=swap');
 
 .__responsive-container {
   @apply grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 bg-black grid 
