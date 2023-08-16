@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { PokemonHome } from "./components";
-import { getPokemons, getPokemonType } from "./libs/fetcher functions";
+import {  getPokemonType } from "./libs/fetcher functions";
+import { PokemonTypes } from "./components/PokemonHome";
 
 // Initial Page
 const initialPage = 0;
@@ -14,7 +15,7 @@ function App() {
     queryKey: ["pokemonTypes", currentPage],
     queryFn: () => getPokemonType(currentPage),
   });
-  const pokemons = pokemonTypes?.map((pokemon: any, key) => {
+  const pokemons = pokemonTypes?.map((pokemon:any , key) => {
     return {
       id: currentPage + key + 1,
       name: pokemon.name,

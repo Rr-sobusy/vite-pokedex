@@ -78,7 +78,7 @@
 }
 
 .__responsive-container {
-  @apply grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 bg-black grid 
+  @apply grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 bg-black 
   justify-center gap-5 lg:gap-7 lg:px-8 px-4 py-4
 }
 
@@ -103,6 +103,10 @@ Pokemon Types bg
 
 }
 
+.ice {
+  @apply bg-gradient-to-r w-full from-[#6fe3e1] to-[#5257e5]
+}
+
 .electric {
   @apply bg-gradient-to-r w-full from-[#ff930f] to-[#fff95b]
 }
@@ -113,4 +117,24 @@ Pokemon Types bg
 
 .ground {
   @apply bg-gradient-to-r w-full from-[#beb15b] to-[#d5cfac]
+}
+
+.normal {
+  @apply bg-gradient-to-r w-full from-[#f6c4ed] to-[#facefb]
+}
+
+/* .poison {
+  @apply bg-gradient-to-r w-full from-[#30c5d2] to-[#471069]
+} */
+
+.fighting {
+  @apply bg-gradient-to-r w-full from-[#6274e7] to-[#8752a3]
+}
+
+.psychic {
+  @apply bg-gradient-to-r w-full from-[#858e96] to-[#60696b]
+}
+
+.fairy {
+  @apply bg-gradient-to-r w-full from-[#51c26f] to-[#f2e901]
 }

@@ -1,4 +1,3 @@
-import React from "react";
 import { getPokemonImgs } from "../libs/utils";
 import {
   Select,
@@ -7,6 +6,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {clsx} from 'clsx'
 
 type Props = {
   pokemons: any;
@@ -17,19 +17,19 @@ const PokemonHome = (props: Props) => {
   const { pokemons, changePageHandler } = props;
   return (
     <>
-      <div className="__main-container">
+      <div className="__main-container ">
         <p className="text-white tracking-[6px] font-bold text-[2.5rem] text-center font-['Bitter'] pt-7">
           React Pokedex
         </p>
         <p className="text-white tracking-[6px]  text-sm text-center">
           Let the fun begin!
         </p>
-        <div className="flex mt-5 flex-col gap-2 items-center">
-          <h3 className="text-md font-['Ubuntu'] text-slate-200 font-semibold tracking-[4px]">
+        <div className="flex mt-8 mb-3 flex-col gap-2 items-center">
+          <h3 className="text-md font-['Bitter'] text-slate-200 font-semibold tracking-[4px]">
             Select Page
           </h3>
-          <Select onValueChange={(e) => changePageHandler(Number(e))}>
-            <SelectTrigger value={"rex"} className="w-[250px] bg-slate-300">
+          <Select defaultValue={"1"} onValueChange={(e) => changePageHandler(Number(e))}>
+            <SelectTrigger className="w-[250px] bg-slate-300">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -41,7 +41,7 @@ const PokemonHome = (props: Props) => {
             </SelectContent>
           </Select>
         </div>
-        <div className="__responsive-container">
+        <div className={`__responsive-container ${clsx({grid : pokemons})}`}>
           {pokemons ? (
             pokemons.map(
               (values: { name: string; id: number; type: string[] }) => (
@@ -52,7 +52,7 @@ const PokemonHome = (props: Props) => {
                   )} cursor-pointer hover:scale-105 duration-500 rounded-lg            
               `}
                 >
-                  <p className="text-white text-lg absolute ml-3 mt-2">{`${values.id}`}</p>
+                  <p className="text-white font-semibold text-lg absolute ml-3 mt-2">{`${values.id}`}</p>
                   <img
                     className="justify-self-center h-[250px] w-[250px]"
                     alt=""
@@ -68,7 +68,9 @@ const PokemonHome = (props: Props) => {
               )
             )
           ) : (
-            <p className="text-white">Loading Pokemons ...</p>
+            <div className="w-full flex justify-center">
+                <p className="text-white">Loading pokemons . . .</p>
+            </div>
           )}
         </div>
       </div>
