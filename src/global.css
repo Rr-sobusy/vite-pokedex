@@ -94,6 +94,11 @@ Pokemon Types bg
  @apply bg-gradient-to-r w-full from-[#00ff87] to-[#60efff]
 }
 
+.poison {
+  @apply bg-gradient-to-r w-full from-[#00ff87] to-[#60efff]
+ }
+ 
+
 .fire {
   @apply  bg-gradient-to-r w-full from-[#f3696e] to-[#f4762d]
 }
