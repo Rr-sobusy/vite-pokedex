@@ -6,10 +6,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {clsx} from 'clsx'
+import { clsx } from "clsx";
+import { PokemonTypes } from "@/types";
 
 type Props = {
-  pokemons: any;
+  pokemons: PokemonTypes[];
   changePageHandler: (event: number) => void;
 };
 
@@ -28,7 +29,10 @@ const PokemonHome = (props: Props) => {
           <h3 className="text-md font-['Bitter'] text-slate-200 font-semibold tracking-[4px]">
             Select Page
           </h3>
-          <Select defaultValue={"1"} onValueChange={(e) => changePageHandler(Number(e))}>
+          <Select
+            defaultValue={"1"}
+            onValueChange={(e) => changePageHandler(Number(e))}
+          >
             <SelectTrigger className="w-[250px] bg-slate-300">
               <SelectValue />
             </SelectTrigger>
@@ -41,35 +45,33 @@ const PokemonHome = (props: Props) => {
             </SelectContent>
           </Select>
         </div>
-        <div className={`__responsive-container ${clsx({grid : pokemons})}`}>
+        <div className={`__responsive-container ${clsx({ grid: pokemons })}`}>
           {pokemons ? (
-            pokemons.map(
-              (values: { name: string; id: number; type: string[] }) => (
-                <div
-                  key={values.id}
-                  className={`grid ${values.type.join(
-                    " "
-                  )} cursor-pointer hover:scale-105 duration-500 rounded-lg            
+            pokemons.map((values) => (
+              <div
+                key={values.id}
+                className={`grid ${values.types.join(
+                  " "
+                )} cursor-pointer hover:scale-105 duration-500 rounded-lg            
               `}
-                >
-                  <p className="text-white font-semibold text-lg absolute ml-3 mt-2">{`${values.id}`}</p>
-                  <img
-                    className="justify-self-center h-[250px] w-[250px]"
-                    alt=""
-                    src={getPokemonImgs(values.id)}
-                  />
-                  <p className="text-center tracking-[7px] mb-4 font-sans font-semibold text-white capitalize text-2xl">
-                    {values.name}
-                  </p>
-                  <p className="text-center mb-4 font-sans font-semibold text-white capitalize text-md">
-                    {values.type.join(" ")}
-                  </p>
-                </div>
-              )
-            )
+              >
+                <p className="text-white font-semibold text-lg absolute ml-3 mt-2">{`${values.id}`}</p>
+                <img
+                  className="justify-self-center h-[250px] w-[250px]"
+                  alt=""
+                  src={getPokemonImgs(Number(values.id))}
+                />
+                <p className="text-center tracking-[7px] mb-4 font-sans font-semibold text-white capitalize text-2xl">
+                  {values.name}
+                </p>
+                <p className="text-center mb-4 font-sans font-semibold text-white capitalize text-md">
+                  {values.types.join(" ")}
+                </p>
+              </div>
+            ))
           ) : (
             <div className="w-full flex justify-center">
-                <p className="text-white">Loading pokemons . . .</p>
+              <p className="text-white">Loading pokemons <span className="animate-pulse">. . .</span></p>
             </div>
           )}
         </div>
