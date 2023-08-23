@@ -11,8 +11,8 @@ import { PokemonTypes } from "@/types";
 
 type Props = {
   pokemons: PokemonTypes[];
-  changePageHandler: (event: number) => void;
-  clickHandler: (pokemonId: number | undefined) => void;
+  changePageHandler?: (event: number) => void;
+  clickHandler?: (pokemonId: number | undefined) => void;
 };
 
 const POKEMON_PAGES = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -32,10 +32,7 @@ const PokemonHome = (props: Props) => {
           <h3 className="text-md font-['Bitter'] text-slate-200 font-semibold tracking-[4px]">
             Select Page
           </h3>
-          <Select
-            defaultValue={"1"}
-            onValueChange={(e) => changePageHandler(Number(e))}
-          >
+          <Select defaultValue={"1"}>
             <SelectTrigger className="w-[250px] bg-slate-300">
               <SelectValue />
             </SelectTrigger>
@@ -52,7 +49,6 @@ const PokemonHome = (props: Props) => {
           {pokemons ? (
             pokemons.map((values) => (
               <div
-                onClick={() => clickHandler(values.id)}
                 key={values.id}
                 className={`grid ${values.types.join(
                   " "

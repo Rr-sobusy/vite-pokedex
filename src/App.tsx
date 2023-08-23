@@ -53,9 +53,7 @@ function App() {
   };
   return (
     <PokemonHome
-      clickHandler={pokemonClick}
-      changePageHandler={pageHandler}
-      pokemons={pokemons}
+      pokemons={[]}
     />
   );
 }
