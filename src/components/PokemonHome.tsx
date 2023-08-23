@@ -12,10 +12,13 @@ import { PokemonTypes } from "@/types";
 type Props = {
   pokemons: PokemonTypes[];
   changePageHandler: (event: number) => void;
+  clickHandler: (pokemonId: number | undefined) => void;
 };
 
+const POKEMON_PAGES = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
 const PokemonHome = (props: Props) => {
-  const { pokemons, changePageHandler } = props;
+  const { pokemons, changePageHandler, clickHandler } = props;
   return (
     <>
       <div className="__main-container ">
@@ -37,7 +40,7 @@ const PokemonHome = (props: Props) => {
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num: number) => (
+              {POKEMON_PAGES.map((num: number) => (
                 <SelectItem key={num} value={num.toString()}>
                   {num}
                 </SelectItem>
@@ -49,6 +52,7 @@ const PokemonHome = (props: Props) => {
           {pokemons ? (
             pokemons.map((values) => (
               <div
+                onClick={() => clickHandler(values.id)}
                 key={values.id}
                 className={`grid ${values.types.join(
                   " "
@@ -71,7 +75,7 @@ const PokemonHome = (props: Props) => {
             ))
           ) : (
             <div className="w-full flex justify-center">
-              <p className="text-white">Loading pokemons <span className="animate-pulse">. . .</span></p>
+              <p className="text-white animate-pulse">Loading pokemons ...</p>
             </div>
           )}
         </div>

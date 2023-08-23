@@ -30,6 +30,7 @@ export async function getPokemonType(pageNumber: number) {
         ),
       });
     }
+    console.log("rendered")
     return pokemonTypes;
   } catch (error) {
     console.error(error);

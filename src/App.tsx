@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { PokemonHome } from "./components";
-import {  getPokemonType } from "./libs/fetcher functions";
-
+import { getPokemonType } from "./libs/fetcher functions";
+import { useNavigate } from "react-router-dom";
 // Initial Page
 const initialPage = 0;
 function App() {
+  const navigate = useNavigate();
+
   // Local states
   const [currentPage, setCurrentPage] = useState<number>(initialPage);
 
@@ -14,15 +16,13 @@ function App() {
     queryKey: ["pokemonTypes", currentPage],
     queryFn: () => getPokemonType(currentPage),
   });
-  const pokemons = pokemonTypes?.map((pokemon , key) => {
+  const pokemons = pokemonTypes?.map((pokemon, key) => {
     return {
       id: currentPage + key + 1,
       name: pokemon.name,
       types: pokemon.types,
     };
   });
-
-  // Fetch Pokemon types
 
   const pageHandler = (pageNumber: number) => {
     setCurrentPage(() => {
@@ -47,7 +47,17 @@ function App() {
         : 0;
     });
   };
-  return <PokemonHome changePageHandler={pageHandler} pokemons={pokemons} />;
+
+  const pokemonClick = (pokemonId: number) => {
+  
+  };
+  return (
+    <PokemonHome
+      clickHandler={pokemonClick}
+      changePageHandler={pageHandler}
+      pokemons={pokemons}
+    />
+  );
 }
 
 export default App;
