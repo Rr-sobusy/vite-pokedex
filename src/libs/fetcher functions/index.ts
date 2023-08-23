@@ -1,6 +1,5 @@
 import { PokemonTypes } from "@/types";
 
-
 // Get pokemon datas from API with pagination parameters
 export async function getPokemons(page: number) {
   try {
@@ -14,24 +13,12 @@ export async function getPokemons(page: number) {
 }
 
 // Get pokemon types pokemonId
-export async function getPokemonType(pageNumber: number) {
+export async function getPokemonType(pokemonId: number) {
   try {
-    let pokemonTypes: PokemonTypes[] = [];
-    const pokemonArray = Array.from({ length: 100 }, (_, index) => index + 1);
-    for (const pokemons in pokemonArray) {
-      const pokemonType = await fetch(
-        `https://pokeapi.co/api/v2/pokemon/${Number(pokemons) + 1 + pageNumber}`
-      );
-      const type = await pokemonType?.json();
-      pokemonTypes.push({
-        name: type.species.name,
-        types: type.types.map(
-          (val: { type: { name: string } }) => val.type.name
-        ),
-      });
-    }
-    console.log("rendered")
-    return pokemonTypes;
+    const pokemonStats = await fetch(
+      `https://pokeapi.co/api/v2/pokemon/${pokemonId}`
+    );
+    return pokemonStats.json();
   } catch (error) {
     console.error(error);
   }
