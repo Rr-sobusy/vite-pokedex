@@ -7,11 +7,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { clsx } from "clsx";
-import { PokemonTypes } from "@/types";
+import { PokemonType } from "@/hooks/usePokemon";
 
 type Props = {
-  pokemons: PokemonTypes[];
-  changePageHandler?: (event: number) => void;
+  pokemons: PokemonType[];
+  changePageHandler: (event: number) => void;
   clickHandler?: (pokemonId: number | undefined) => void;
 };
 
@@ -32,7 +32,7 @@ const PokemonHome = (props: Props) => {
           <h3 className="text-md font-['Bitter'] text-slate-200 font-semibold tracking-[4px]">
             Select Page
           </h3>
-          <Select defaultValue={"1"}>
+          <Select onValueChange={(value)=>changePageHandler(Number(value))} defaultValue={"1"}>
             <SelectTrigger className="w-[250px] bg-slate-300">
               <SelectValue />
             </SelectTrigger>
@@ -50,7 +50,7 @@ const PokemonHome = (props: Props) => {
             pokemons.map((values) => (
               <div
                 key={values.id}
-                className={`grid ${values.types.join(
+                className={`grid ${values.type.join(
                   " "
                 )} cursor-pointer hover:scale-105 duration-500 rounded-lg            
               `}
@@ -65,7 +65,7 @@ const PokemonHome = (props: Props) => {
                   {values.name}
                 </p>
                 <p className="text-center mb-4 font-sans font-semibold text-white capitalize text-md">
-                  {values.types.join(" ")}
+                  {values.type.join(" ")}
                 </p>
               </div>
             ))

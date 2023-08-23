@@ -79,7 +79,7 @@
 
 .__responsive-container {
   @apply grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 bg-black 
-  justify-center gap-5 lg:gap-7 lg:px-8 px-4 py-4
+  justify-center gap-5 lg:gap-5 lg:px-8 px-4 py-4
 }
 
 .__main-container {
