@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { GenerationListTypes } from "@/types";
 
 export interface PokemonType {
   id: number;
@@ -8,37 +9,31 @@ export interface PokemonType {
 }
 
 // Hook for fetching datas from api and set id,name,type,imgUrl
-export const usePokemon = ({ pageNumber }: { pageNumber: number }) => {
+export const usePokemon = ({
+  generation,
+}: {
+  generation: GenerationListTypes;
+}) => {
   const { data } = useQuery({
+    queryKey: ["pokemons", generation],
     queryFn: async () => {
-      const pokemonDatas: PokemonType[] = [];
-      const pokemons = Array.from({ length: 100 }).map(
-        (_, index) => index++
+      // Fetch pokemon details per generation
+      const pokemonDatas = await fetch(
+        `https://pokeapi.co/api/v2/pokemon?limit=${
+          generation.newPokemons
+        }&offset=${generation.totalPokemons - generation.newPokemons}`
       );
-      for (const pokemon in pokemons) {
-        try {
-          const pokemonss = await fetch(
-            `https://pokeapi.co/api/v2/pokemon/${Number(pokemon) + 1 + pageNumber}`
-          );
-          const pokemonApi = await pokemonss.json();
-          const type = pokemonApi?.types.map(
-            (i: { type: { name: string } }) => i.type.name
-          );
-          pokemonDatas.push({
-            id: Number(pokemon) + pageNumber + 1,
-            name: pokemonApi.forms[0].name,
-            type: type,
-            imgUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${
-              Number(pokemon) + 1
-            }.png`,
-          });
-        } catch (error) {
-          console.error(error);
+      const result = await pokemonDatas.json();
+
+      // Fetch pokemon stats per generation by iterating API url of each pokemon
+      const pokemonListArray = result.results?.map(
+        async (pokemon: { url: string }) => {
+          const pokemonPromise = await fetch(pokemon.url);
+          return pokemonPromise.json();
         }
-      }
-      return pokemonDatas;
+      );
+      return Promise.all(pokemonListArray);
     },
-    queryKey: ["pokemons", pageNumber],
     refetchOnWindowFocus: false,
   });
   return {

@@ -1,4 +1,3 @@
-import { PokemonTypes } from "@/types";
 
 // Get pokemon datas from API with pagination parameters
 export async function getPokemons(page: number) {

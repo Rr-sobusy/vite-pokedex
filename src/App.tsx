@@ -1,43 +1,36 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState } from "react";
+import { PokemonHome } from "./components";
+import { GenerationList } from "./libs/utils";
+import { GenerationListTypes } from "./types";
+import { usePokemon } from "./hooks/usePokemon";
 
-function PokemonList() {
-  const [pokemonList, setPokemonList] = useState([]);
+type Props = {};
 
-  useEffect(() => {
-    async function fetchPokemonData() {
-      try {
-        const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=151'); // Fetching first 151 Pokémon for example
-        const results = response.data.results;
-        
-        // Fetch additional details for each Pokémon
-        const pokemonDataPromises = results.map(async (pokemon) => {
-          const response = await axios.get(pokemon.url);
-          return response.data;
-        });
-        
-        const pokemonData = await Promise.all(pokemonDataPromises);
-        setPokemonList(pokemonData);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    }
-
-    fetchPokemonData();
-  }, []);
-
-  return (
-    <div>
-      <h1>Pokémon List</h1>
-      <ul>
-        {pokemonList.map((pokemon) => (
-          <li key={pokemon.id}>
-            <strong>{pokemon.name}</strong> - Types: {pokemon.types.map(type => type.type.name).join(', ')}
-          </li>
-        ))}
-      </ul>
-    </div>
+const App = (props: Props) => {
+  // Local states
+  const [generations, setGenerations] = useState<GenerationListTypes>(
+    GenerationList[0]
   );
-}
 
-export default PokemonList;
+  // Custom hook for rendering pokemon stats
+  const { data } = usePokemon({ generation: generations });
+  const changePageHandler = (e: string) => {
+    const selectedGeneration = GenerationList.findIndex(
+      (i) => i.generation === e
+    );
+    setGenerations(GenerationList[selectedGeneration]);
+  };
+
+  console.log(data);
+  return (
+    <>
+      <PokemonHome
+        changePageHandler={changePageHandler}
+        generationList={GenerationList}
+        pokemons={[]}
+      />
+    </>
+  );
+};
+
+export default App;

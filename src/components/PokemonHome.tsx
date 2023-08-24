@@ -1,4 +1,3 @@
-import { getPokemonImgs } from "../libs/utils";
 import {
   Select,
   SelectContent,
@@ -8,17 +7,17 @@ import {
 } from "@/components/ui/select";
 import { clsx } from "clsx";
 import { PokemonType } from "@/hooks/usePokemon";
+import { GenerationListTypes } from "@/types";
 
 type Props = {
   pokemons: PokemonType[];
-  changePageHandler: (event: number) => void;
+  changePageHandler: (event: string) => void;
   clickHandler?: (pokemonId: number | undefined) => void;
+  generationList: GenerationListTypes[];
 };
 
-const POKEMON_PAGES = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
 const PokemonHome = (props: Props) => {
-  const { pokemons, changePageHandler, clickHandler } = props;
+  const { pokemons, changePageHandler, clickHandler, generationList } = props;
   return (
     <>
       <div className="__main-container ">
@@ -32,14 +31,17 @@ const PokemonHome = (props: Props) => {
           <h3 className="text-md font-['Bitter'] text-slate-200 font-semibold tracking-[4px]">
             Select Page
           </h3>
-          <Select onValueChange={(value)=>changePageHandler(Number(value))} defaultValue={"1"}>
+          <Select
+            onValueChange={(value) => changePageHandler(value)}
+            defaultValue={"I"}
+          >
             <SelectTrigger className="w-[250px] bg-slate-300">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              {POKEMON_PAGES.map((num: number) => (
-                <SelectItem key={num} value={num.toString()}>
-                  {num}
+              {generationList.map((list, index) => (
+                <SelectItem key={index} value={list.generation}>
+                  {list.generation}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -59,7 +61,7 @@ const PokemonHome = (props: Props) => {
                 <img
                   className="justify-self-center h-[250px] w-[250px]"
                   alt=""
-                  src={getPokemonImgs(Number(values.id))}
+                  src={``}
                 />
                 <p className="text-center tracking-[7px] mb-4 font-sans font-semibold text-white capitalize text-2xl">
                   {values.name}
