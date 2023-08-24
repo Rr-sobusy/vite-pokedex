@@ -13,7 +13,7 @@ const App = (props: Props) => {
   );
 
   // Custom hook for rendering pokemon stats
-  const { data } = usePokemon({ generation: generations });
+  const { pokemonDatas } = usePokemon({ generation: generations });
   const changePageHandler = (e: string) => {
     const selectedGeneration = GenerationList.findIndex(
       (i) => i.generation === e
@@ -21,7 +21,11 @@ const App = (props: Props) => {
     setGenerations(GenerationList[selectedGeneration]);
   };
 
-  console.log(data);
+  const edited = pokemonDatas?.map(({ sprites }) => {
+      return sprites.other
+  });
+
+  console.log(edited[0]);
   return (
     <>
       <PokemonHome

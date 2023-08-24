@@ -14,7 +14,7 @@ export const usePokemon = ({
 }: {
   generation: GenerationListTypes;
 }) => {
-  const { data } = useQuery({
+  const { data: pokemonDatas } = useQuery({
     queryKey: ["pokemons", generation],
     queryFn: async () => {
       // Fetch pokemon details per generation
@@ -25,7 +25,7 @@ export const usePokemon = ({
       );
       const result = await pokemonDatas.json();
 
-      // Fetch pokemon stats per generation by iterating API url of each pokemon
+      // Fetch pokemon stats per generation by iterating API url of each pokemon fetched earlier
       const pokemonListArray = result.results?.map(
         async (pokemon: { url: string }) => {
           const pokemonPromise = await fetch(pokemon.url);
@@ -37,6 +37,6 @@ export const usePokemon = ({
     refetchOnWindowFocus: false,
   });
   return {
-    data,
+    pokemonDatas,
   };
 };

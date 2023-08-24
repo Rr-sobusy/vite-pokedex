@@ -28,8 +28,8 @@ const PokemonHome = (props: Props) => {
           Let the fun begin!
         </p>
         <div className="flex mt-8 mb-3 flex-col gap-2 items-center">
-          <h3 className="text-md font-['Bitter'] text-slate-200 font-semibold tracking-[4px]">
-            Select Page
+          <h3 className="text-sm font-['Bitter'] text-slate-200 font-semibold tracking-[4px]">
+            Select Generation
           </h3>
           <Select
             onValueChange={(value) => changePageHandler(value)}
