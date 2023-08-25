@@ -1,13 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { GenerationListTypes } from "@/types";
 
-export interface PokemonType {
-  id: number;
-  name: string;
-  type: string[];
-  imgUrl: string;
-}
-
 // Hook for fetching datas from api and set id,name,type,imgUrl
 export const usePokemon = ({
   generation,
@@ -26,7 +19,7 @@ export const usePokemon = ({
       const result = await pokemonDatas.json();
 
       // Fetch pokemon stats per generation by iterating API url of each pokemon fetched earlier
-      const pokemonListArray = result.results?.map(
+      const pokemonListArray = result?.results.map(
         async (pokemon: { url: string }) => {
           const pokemonPromise = await fetch(pokemon.url);
           return pokemonPromise.json();

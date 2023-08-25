@@ -97,8 +97,26 @@ Pokemon Types bg
 .poison {
   @apply bg-gradient-to-r w-full from-[#00ff87] to-[#60efff]
  }
- 
 
+ .rock {
+  @apply bg-gradient-to-r w-full from-slate-200 to-slate-500
+ }
+
+ .dark {
+  @apply bg-gradient-to-r w-full from-gray-800 to-gray-950
+ }
+
+ .ghost {
+  @apply bg-gradient-to-r w-full from-stone-600 to-gray-700
+ } 
+ 
+ .steel {
+  @apply bg-gradient-to-r w-full from-stone-600 to-gray-700
+ }  
+
+ .dragon {
+  @apply  bg-gradient-to-r w-full from-[#f3696e] to-[#f4762d]
+}
 .fire {
   @apply  bg-gradient-to-r w-full from-[#f3696e] to-[#f4762d]
 }

@@ -6,13 +6,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { clsx } from "clsx";
-import { PokemonType } from "@/hooks/usePokemon";
+import { PokemonType } from "@/types";
 import { GenerationListTypes } from "@/types";
+import Pokeball from "../assets/5.png";
 
 type Props = {
   pokemons: PokemonType[];
   changePageHandler: (event: string) => void;
-  clickHandler?: (pokemonId: number | undefined) => void;
+  clickHandler: (pokemonId: number) => void;
   generationList: GenerationListTypes[];
 };
 
@@ -50,7 +51,8 @@ const PokemonHome = (props: Props) => {
         <div className={`__responsive-container ${clsx({ grid: pokemons })}`}>
           {pokemons ? (
             pokemons.map((values) => (
-              <div
+              <div  
+                onClick={()=>clickHandler(values.id)}
                 key={values.id}
                 className={`grid ${values.type.join(
                   " "
@@ -61,7 +63,7 @@ const PokemonHome = (props: Props) => {
                 <img
                   className="justify-self-center h-[250px] w-[250px]"
                   alt=""
-                  src={``}
+                  src={values.imgSrc}
                 />
                 <p className="text-center tracking-[7px] mb-4 font-sans font-semibold text-white capitalize text-2xl">
                   {values.name}
@@ -73,7 +75,9 @@ const PokemonHome = (props: Props) => {
             ))
           ) : (
             <div className="w-full flex justify-center">
-              <p className="text-white animate-pulse">Loading pokemons ...</p>
+              <p className="text-white animate-spin">
+                <img className="w-[110px] h-[110px]" src={Pokeball} />
+              </p>
             </div>
           )}
         </div>

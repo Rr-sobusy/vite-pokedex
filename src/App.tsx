@@ -3,10 +3,14 @@ import { PokemonHome } from "./components";
 import { GenerationList } from "./libs/utils";
 import { GenerationListTypes } from "./types";
 import { usePokemon } from "./hooks/usePokemon";
+import { useNavigate } from "react-router-dom";
 
 type Props = {};
 
 const App = (props: Props) => {
+  //
+  const navigatePage = useNavigate();
+
   // Local states
   const [generations, setGenerations] = useState<GenerationListTypes>(
     GenerationList[0]
@@ -21,17 +25,27 @@ const App = (props: Props) => {
     setGenerations(GenerationList[selectedGeneration]);
   };
 
-  const edited = pokemonDatas?.map(({ sprites }) => {
-      return sprites.other
+  const edited = pokemonDatas?.map(({ forms, id, types }) => {
+    return {
+      id: Number(id),
+      name: String(forms[0].name),
+      type: types.map(({ type }: { type: { name: string[] } }) => type.name),
+      imgSrc: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`,
+    };
   });
 
-  console.log(edited[0]);
+  // Navigating to pokemon details
+  const clickHandler = (pokemonId: number) => {
+    navigatePage(`/pokemon/${pokemonId}`);
+  };
+
   return (
     <>
       <PokemonHome
+        clickHandler={clickHandler}
         changePageHandler={changePageHandler}
         generationList={GenerationList}
-        pokemons={[]}
+        pokemons={edited}
       />
     </>
   );
