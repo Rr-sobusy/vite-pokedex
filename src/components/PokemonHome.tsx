@@ -68,9 +68,13 @@ const PokemonHome = (props: Props) => {
                 <p className="text-center tracking-[7px] mb-4 font-sans font-semibold text-white capitalize text-2xl">
                   {values.name}
                 </p>
-                <p className="text-center mb-4 font-sans font-semibold text-white capitalize text-md">
-                  {values.type.join(" ")}
-                </p>
+                <div className="flex pb-3 gap-2 justify-center">
+                {
+                  values.type.map((values)=>{
+                    return <p className="px-4 backdrop-filter backdrop-blur-sm bg-opacity-60 border border-gray-100 rounded-md text-black py-1 mb-1 backdrop-filter-blue">{values}</p>
+                  })
+                }
+                </div>
               </div>
             ))
           ) : (
