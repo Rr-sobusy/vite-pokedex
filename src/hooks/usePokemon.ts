@@ -1,13 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { GenerationListTypes } from "@/types";
 
-// Hook for fetching datas from api and set id,name,type,imgUrl
+// Hook for fetching datas from api and set id,name,type,imgSrc
 export const usePokemon = ({
   generation,
 }: {
   generation: GenerationListTypes;
 }) => {
-  const { data: pokemonDatas } = useQuery({
+  const { data: pokemonDatas = [], isLoading} = useQuery({
     queryKey: ["pokemons", generation],
     queryFn: async () => {
       // Fetch pokemon details per generation
@@ -30,6 +30,6 @@ export const usePokemon = ({
     refetchOnWindowFocus: false,
   });
   return {
-    pokemonDatas,
+    pokemonDatas,isLoading
   };
 };

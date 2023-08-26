@@ -1,13 +1,15 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
+import { twMerge } from 'tailwind-merge'
 
-type Props = {}
 
-const PokemonStats = (props: Props) => {
+const PokemonStats = () => {
   const value = useParams()
   console.log(value)
   return (
-    <div className='__main-container'>{value.pokemonId}</div>
+    <div className='__main-container'>
+      <div className={twMerge()}>rex</div>
+    </div>
   )
 }
 

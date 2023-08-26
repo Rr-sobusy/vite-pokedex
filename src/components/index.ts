@@ -1,5 +1,4 @@
 import PokemonHome from "./PokemonHome";
+import PokemonStats from "./PokemonStats";
 
-export {
-    PokemonHome
-}
+export { PokemonHome, PokemonStats };

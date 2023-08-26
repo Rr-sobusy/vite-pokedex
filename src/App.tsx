@@ -5,9 +5,7 @@ import { GenerationListTypes } from "./types";
 import { usePokemon } from "./hooks/usePokemon";
 import { useNavigate } from "react-router-dom";
 
-type Props = {};
-
-const App = (props: Props) => {
+const App = () => {
   //
   const navigatePage = useNavigate();
 
@@ -17,17 +15,21 @@ const App = (props: Props) => {
   );
 
   // Custom hook for rendering pokemon stats
-  const { pokemonDatas } = usePokemon({ generation: generations });
+  const { pokemonDatas, isLoading } = usePokemon({ generation: generations });
 
   // Filter the datas to - {id, name , type , imgSrc only}
-  const edited = pokemonDatas?.map(({ forms, id, types }) => {
-    return {
-      id: Number(id),
-      name: String(forms[0].name),
-      type: types.map(({ type }: { type: { name: string[] } }) => type.name),
-      imgSrc: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`,
-    };
-  });
+  const edited = !isLoading
+    ? pokemonDatas.map(({ forms, id, types }) => {
+        return {
+          id: id,
+          name: forms[0].name,
+          type: types.map(
+            ({ type }: { type: { name: string[] } }) => type.name
+          ),
+          imgSrc: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`,
+        };
+      })
+    : [];
 
   // Navigating to pokemon details
 
@@ -47,6 +49,7 @@ const App = (props: Props) => {
   return (
     <>
       <PokemonHome
+        isLoading={isLoading}
         clickHandler={clickHandler}
         changePageHandler={changePageHandler}
         generationList={GenerationList}

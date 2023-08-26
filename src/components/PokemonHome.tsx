@@ -15,10 +15,11 @@ type Props = {
   changePageHandler: (event: string) => void;
   clickHandler: (pokemonId: number) => void;
   generationList: GenerationListTypes[];
+  isLoading: boolean
 };
 
 const PokemonHome = (props: Props) => {
-  const { pokemons, changePageHandler, clickHandler, generationList } = props;
+  const { pokemons, changePageHandler, clickHandler, generationList, isLoading } = props;
   return (
     <>
       <div className="__main-container ">
@@ -48,11 +49,10 @@ const PokemonHome = (props: Props) => {
             </SelectContent>
           </Select>
         </div>
-        <div className={`__responsive-container ${clsx({ grid: pokemons })}`}>
-          {pokemons ? (
+        <div className={`__responsive-container ${clsx({ grid: !isLoading })}`}>
+          {!isLoading ? (
             pokemons.map((values) => (
-              
-              /**************************Pokemon Card************************************8*/ 
+              /**************************Pokemon Card************************************8*/
               <div
                 onClick={() => clickHandler(values.id)}
                 key={values.id}
