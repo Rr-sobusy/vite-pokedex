@@ -51,8 +51,10 @@ const PokemonHome = (props: Props) => {
         <div className={`__responsive-container ${clsx({ grid: pokemons })}`}>
           {pokemons ? (
             pokemons.map((values) => (
-              <div  
-                onClick={()=>clickHandler(values.id)}
+              
+              /**************************Pokemon Card************************************8*/ 
+              <div
+                onClick={() => clickHandler(values.id)}
                 key={values.id}
                 className={`grid ${values.type.join(
                   " "
@@ -69,11 +71,13 @@ const PokemonHome = (props: Props) => {
                   {values.name}
                 </p>
                 <div className="flex pb-3 gap-2 justify-center">
-                {
-                  values.type.map((values)=>{
-                    return <p className="px-4 py-1 tracking-[2px] capitalize text-white font-sans h-full bg-gray-400 rounded-sm bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-30 border border-gray-100">{values}</p>
-                  })
-                }
+                  {values.type.map((values) => {
+                    return (
+                      <p className="px-4 py-1 tracking-[2px] capitalize text-white font-sans h-full bg-gray-400 rounded-xl bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-30 border-gray-100">
+                        {values}
+                      </p>
+                    );
+                  })}
                 </div>
               </div>
             ))
