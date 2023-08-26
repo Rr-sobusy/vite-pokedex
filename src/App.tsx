@@ -18,13 +18,8 @@ const App = (props: Props) => {
 
   // Custom hook for rendering pokemon stats
   const { pokemonDatas } = usePokemon({ generation: generations });
-  const changePageHandler = (e: string) => {
-    const selectedGeneration = GenerationList.findIndex(
-      (i) => i.generation === e
-    );
-    setGenerations(GenerationList[selectedGeneration]);
-  };
 
+  // Filter the datas to - {id, name , type , imgSrc only}
   const edited = pokemonDatas?.map(({ forms, id, types }) => {
     return {
       id: Number(id),
@@ -35,8 +30,18 @@ const App = (props: Props) => {
   });
 
   // Navigating to pokemon details
+
   const clickHandler = (pokemonId: number) => {
     navigatePage(`/pokemon/${pokemonId}`);
+  };
+
+  // On changing generation
+
+  const changePageHandler = (e: string) => {
+    const selectedGeneration = GenerationList.findIndex(
+      (i) => i.generation === e
+    );
+    setGenerations(GenerationList[selectedGeneration]);
   };
 
   return (

@@ -7,7 +7,7 @@ const PokemonStats = (props: Props) => {
   const value = useParams()
   console.log(value)
   return (
-    <div>{value.pokemonId}</div>
+    <div className='__main-container'>{value.pokemonId}</div>
   )
 }
 

@@ -71,7 +71,7 @@ const PokemonHome = (props: Props) => {
                 <div className="flex pb-3 gap-2 justify-center">
                 {
                   values.type.map((values)=>{
-                    return <p className="px-4 backdrop-filter backdrop-blur-sm bg-opacity-60 border border-gray-100 rounded-md text-black py-1 mb-1 backdrop-filter-blue">{values}</p>
+                    return <p className="px-4 py-1 tracking-[2px] capitalize text-white font-sans h-full bg-gray-400 rounded-sm bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-30 border border-gray-100">{values}</p>
                   })
                 }
                 </div>
