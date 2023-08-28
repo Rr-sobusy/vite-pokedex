@@ -7,7 +7,7 @@ const PokemonStats = () => {
   console.log(value)
   return (
     <div className='__main-container'>
-      <div className={twMerge()}>rex</div>
+      <div className='text-white'>rex</div>
     </div>
   )
 }

@@ -84,7 +84,7 @@ const PokemonHome = (props: Props) => {
           ) : (
             <div className="w-full flex justify-center">
               <p className="text-white animate-spin">
-                <img className="w-[110px] h-[110px]" src={Pokeball} />
+                <img className="w-[90px] h-[90px]" src={Pokeball} />
               </p>
             </div>
           )}
